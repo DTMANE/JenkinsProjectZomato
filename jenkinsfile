@@ -80,34 +80,46 @@ pipeline {
         }
         stage ("Deploy to Container") {
             steps {
-                sh 'docker run -d --name zomato -p 3000:3000 dtmane/zomato:latest'
+                 sh 'docker rm -f zomato || true'
+                sh 'docker run -d --name zomato -p 3000:80 dtmane/zomato:latest'
             }
         }
     }
+    // post {
+    // always {
+    //     emailext attachLog: true,
+    //         subject: "'${currentBuild.result}'",
+    //         body: """
+    //             <html>
+    //             <body>
+    //                 <div style="background-color: #FFA07A; padding: 10px; margin-bottom: 10px;">
+    //                     <p style="color: white; font-weight: bold;">Project: ${env.JOB_NAME}</p>
+    //                 </div>
+    //                 <div style="background-color: #90EE90; padding: 10px; margin-bottom: 10px;">
+    //                     <p style="color: white; font-weight: bold;">Build Number: ${env.BUILD_NUMBER}</p>
+    //                 </div>
+    //                 <div style="background-color: #87CEEB; padding: 10px; margin-bottom: 10px;">
+    //                     <p style="color: white; font-weight: bold;">URL: ${env.BUILD_URL}</p>
+    //                 </div>
+    //             </body>
+    //             </html>
+    //         """,
+    //         to: 'mane96dinesh@gmail.com',
+    //         mimeType: 'text/html',
+    //         attachmentsPattern: 'trivy.txt'
+    //     }
+    // }
     post {
-    always {
-        emailext attachLog: true,
-            subject: "'${currentBuild.result}'",
-            body: """
-                <html>
-                <body>
-                    <div style="background-color: #FFA07A; padding: 10px; margin-bottom: 10px;">
-                        <p style="color: white; font-weight: bold;">Project: ${env.JOB_NAME}</p>
-                    </div>
-                    <div style="background-color: #90EE90; padding: 10px; margin-bottom: 10px;">
-                        <p style="color: white; font-weight: bold;">Build Number: ${env.BUILD_NUMBER}</p>
-                    </div>
-                    <div style="background-color: #87CEEB; padding: 10px; margin-bottom: 10px;">
-                        <p style="color: white; font-weight: bold;">URL: ${env.BUILD_URL}</p>
-                    </div>
-                </body>
-                </html>
-            """,
-            to: 'mane96dinesh@gmail.com',
-            mimeType: 'text/html',
-            attachmentsPattern: 'trivy.txt'
-        }
-    }
-
+  success {
+    emailext subject: "SUCCESS: Build #${env.BUILD_NUMBER}",
+             body: "Build succeeded. Container deployed.",
+             to: 'mane96dinesh@gmail.com'
+  }
+  failure {
+    emailext subject: "FAILURE: Build #${env.BUILD_NUMBER}",
+             body: "Build failed. Check logs.",
+             to: 'mane96dinesh@gmail.com'
+  }
+}
 
 }
