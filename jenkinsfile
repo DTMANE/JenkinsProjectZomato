@@ -45,6 +45,7 @@ pipeline {
             sh 'npm ci --prefer-offline'
         }
     }
+    
 //                  steps {
 //     sh 'npm ci --prefer-offline'
 //   }
