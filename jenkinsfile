@@ -37,9 +37,12 @@ pipeline {
             // steps {
             //     sh "npm install"
             // }
+                //  steps {
+                //     sh "npm ci"
+                // }
                  steps {
-                    sh "npm ci"
-                }
+    sh 'npm ci --prefer-offline'
+  }
         }
         stage('OWASP FS SCAN') {
             steps {
@@ -156,5 +159,6 @@ pipeline {
             attachmentsPattern: "**/dependency-check-report.html, **/trivy-report.json, **/sonar-report.json, **/docker-scout-report.json, **/trivy.txt"
   }
 }
-
+ 
+ 
 }
