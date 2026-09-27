@@ -37,12 +37,12 @@ pipeline {
             // steps {
             //     sh "npm install"
             // }
-                //  steps {
-                //     sh "npm ci"
-                // }
                  steps {
-    sh 'npm ci --prefer-offline'
-  }
+                    sh "npm ci"
+                }
+//                  steps {
+//     sh 'npm ci --prefer-offline'
+//   }
         }
         stage('OWASP FS SCAN') {
             steps {
@@ -87,13 +87,10 @@ pipeline {
                 sh 'docker run -d --name zomato -p 3000:80 dtmane/zomato:latest'
             }
         }
-        // stage('Clean Workspace') {
-        //     steps {
-        //         cleanWs()
-        //      }
+        
 }
 
-    }
+    
 
         // post {
     // always {
@@ -167,4 +164,4 @@ pipeline {
 }
  
 
-// }
+}
