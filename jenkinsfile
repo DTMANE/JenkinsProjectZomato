@@ -37,9 +37,14 @@ pipeline {
             // steps {
             //     sh "npm install"
             // }
-                 steps {
-                    sh "npm ci"
-                }
+                //  steps {
+                //     sh "npm ci --prefer-offline --cache /var/jenkins_home/.npm"
+                // }
+                steps {
+        cache(path: 'node_modules', key: 'npm-cache') {
+            sh 'npm ci --prefer-offline'
+        }
+    }
 //                  steps {
 //     sh 'npm ci --prefer-offline'
 //   }
