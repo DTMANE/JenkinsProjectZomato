@@ -87,6 +87,12 @@ pipeline {
                 sh 'docker run -d --name zomato -p 3000:80 dtmane/zomato:latest'
             }
         }
+        // stage('Clean Workspace') {
+        //     steps {
+        //         cleanWs()
+        //      }
+}
+
     }
 
         // post {
@@ -160,5 +166,5 @@ pipeline {
   }
 }
  
- 
+
 }
