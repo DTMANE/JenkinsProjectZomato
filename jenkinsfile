@@ -59,7 +59,7 @@ pipeline {
 //                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
 //     }
 // }
-// stage('OWASP FS SCAN') {
+stage('OWASP FS SCAN') {
 //     steps {
 //         dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit --update', odcInstallation: 'DP-Check'
 //         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
