@@ -41,16 +41,16 @@ pipeline {
                 //     sh "npm ci --prefer-offline --cache /var/jenkins_home/.npm"
                 // }
                 steps {
-        cache(maxCacheSize: 2, caches: [
-            [$class: 'JobCache', key: 'npm-cache', path: 'node_modules']
-        ]) {
-            sh 'npm ci --prefer-offline'
-        }
-    }
+    //     cache(maxCacheSize: 2, caches: [
+    //         [$class: 'JobCache', key: 'npm-cache', path: 'node_modules']
+    //     ]) {
+    //         sh 'npm ci --prefer-offline'
+    //     }
+    // }
 
-//                  steps {
-//     sh 'npm ci --prefer-offline'
-//   }
+                 steps {
+    sh 'npm ci --prefer-offline'
+  }
         }
         stage('OWASP FS SCAN') {
             steps {
