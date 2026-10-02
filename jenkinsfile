@@ -156,6 +156,7 @@ pipeline {
     //         attachmentsPattern: 'trivy.txt'
     //     }
     // }
+    
     post {
   success {
     emailext subject: "SUCCESS: Build #${env.BUILD_NUMBER}",
