@@ -70,25 +70,25 @@ pipeline {
 // )
 // }
 // }
-stage('OWASP FS SCAN') {
-    steps {
-        dependencyCheck(
-            odcInstallation: 'DP-Check',
-            additionalArguments: '''
-                --scan .
-                --format XML
-                --format HTML
-                --disableYarnAudit
-                --disableNodeAudit
-                --out .
-            '''
-        )
+// stage('OWASP FS SCAN') {
+//     steps {
+//         dependencyCheck(
+//             odcInstallation: 'DP-Check',
+//             additionalArguments: '''
+//                 --scan .
+//                 --format XML
+//                 --format HTML
+//                 --disableYarnAudit
+//                 --disableNodeAudit
+//                 --out .
+//             '''
+//         )
 
-        dependencyCheckPublisher(
-            pattern: 'dependency-check-report.xml'
-        )
-    }
-}
+//         dependencyCheckPublisher(
+//             pattern: 'dependency-check-report.xml'
+//         )
+//     }
+// }
 
         stage ("Trivy File Scan") {
             steps {
