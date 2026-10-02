@@ -176,6 +176,7 @@ pipeline {
             """,
              to: 'mane96dinesh@gmail.com',
              attachLog: true,
+             mimeType: 'text/html',
             attachmentsPattern: "**/dependency-check-report.html, **/trivy-report.json, **/sonar-report.json, **/docker-scout-report.json, **/trivy.txt"
   }
   failure {
